@@ -6,3 +6,6 @@ __pycache__/
 
 # The virtual environment directory
 .venv/
+
+# Downloaded zip file
+data/diabetes_orig.zip

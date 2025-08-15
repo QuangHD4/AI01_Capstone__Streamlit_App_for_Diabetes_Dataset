@@ -16,8 +16,8 @@ Deployed App: [Click here to try it out](https://ai01-capstone-quang-bk85f8nm8fo
   - Predict diabetes likelihood by entering patient data.
 
 # Dataset
-Source: Pima Indians Diabetes Database, available on [kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)
-Attributes: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age
+Source: Pima Indians Diabetes Database, available on [kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)  
+Attributes: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age  
 Target: Outcome - diabetes (1), non-diabetes (0).
 
 # Installation
@@ -26,14 +26,16 @@ Target: Outcome - diabetes (1), non-diabetes (0).
 git clone https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset.git
 cd https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset.git
 ```
-2. Create and activate a virtual environment
-`python -m venv venv`
-Windows: `env\Scripts\activate`
-macOS/Linux: `source env/bin/activate`
-3. Install dependencies
-`pip install -r requirements.txt`
-4. Run the Streamlit app
-`streamlit run main.py`
+2. Create and activate a virtual environment  
+```python -m venv venv```
+Windows:
+```env\Scripts\activate```
+macOS/Linux:
+```source env/bin/activate```
+4. Install dependencies
+```pip install -r requirements.txt```
+5. Run the Streamlit app
+```streamlit run main.py```
 
 # Project Structure
 ```

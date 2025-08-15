@@ -37,7 +37,7 @@ logreg_pipe = Pipeline([
     ('LogReg', LogisticRegression())
 ])
 logreg_pipe.fit(X_train, y_train)
-joblib.dump(logreg_pipe, 'models/LogReg.pkl')
+joblib.dump(logreg_pipe, 'models/logreg.pkl')
 
 
 knn_pipe = Pipeline([

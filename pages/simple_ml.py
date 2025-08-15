@@ -43,7 +43,10 @@ with model_tryout:
         else:
             model_input = [list(features.values())]
             pred = model.predict(model_input)[0]
-            st.write('Positive (have diabetes)' if pred == 0 else 'Negative')
+            if pred:
+                'Positive (have diabetes)'
+            else:
+                'Negative'
 
 with code_and_model_selection:      # The other tab
     with st.expander('Full code'):

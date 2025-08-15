@@ -3,6 +3,7 @@
 
 # Overview
 This project is a Streamlit-based web application for predicting the likelihood of diabetes in patients based on various health metrics. It uses machine learning models trained on the Pima Indians Diabetes Dataset. The app allows users to explore the dataset, understand relationships between features, and test predictions using different models.  
+
 Deployed App: [Click here to try it out](https://ai01-capstone-quang-bk85f8nm8fonqyquqnenh4.streamlit.app/)
 
 # Features in each page

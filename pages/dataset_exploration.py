@@ -1,5 +1,3 @@
-from typing import Sequence
-
 from src.utils import charts_for_cols, column_multicheck_dropdown_with_aggregations
 
 import pandas as pd
@@ -67,14 +65,14 @@ fig = ff.create_distplot(
 )
 st.plotly_chart(fig)
 
-st.markdown('#### 2.3. Pairwise scatter plots (also split by outcome)')
+st.markdown('#### 2.3. Pairwise scatter plots')
 left_col, right_col = st.columns(2)
 with left_col:
     feat_x = st.selectbox('Feature 1 (x)', data_diabetes.columns.drop('Outcome'))
 with right_col:
     feat_y = st.selectbox('Feature 2 (y)', data_diabetes.columns.drop([feat_x, 'Outcome']))
 
-if feat_x and feat_y:
+if st.checkbox('Split by outcome'):
     fig = go.Figure()
     fig.add_traces([
         go.Scatter(
@@ -94,6 +92,11 @@ if feat_x and feat_y:
         xaxis_title=feat_x, yaxis_title=feat_y, 
         title=f'Correlation coefficient: {corr_matrix.loc[feat_x, feat_y]}'
     )
+    st.plotly_chart(fig)
+else:
+    fig = px.scatter(x=data_diabetes[feat_x], y=data_diabetes[feat_y], trendline='ols')
+    fig.update_traces(marker_size=10)
+    fig.update_layout(title=f'Correlation coefficient: {corr_matrix.loc[feat_x, feat_y]}')
     st.plotly_chart(fig)
 
 

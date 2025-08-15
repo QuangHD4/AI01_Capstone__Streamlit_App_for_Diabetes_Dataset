@@ -24,8 +24,8 @@ with model_tryout:
         cols = list(features.keys())
         ll, lc, rc, rr = st.columns(4)
         with ll:
-            features['Pregnancies'] = st.number_input('Pregnancies', min_value=0, step=1, format='%d', value=None, placeholder='', help='')
-            features['Insulin'] = st.number_input('Insulin', min_value=0.0, format='%.2f', value=None, placeholder='')
+            features['Pregnancies'] = st.number_input('Pregnancies', min_value=0, step=1, format='%d', value=None, placeholder='')
+            features['Insulin'] = st.number_input('Insulin', min_value=0, step=1, format='%d', value=None, placeholder='')
         with lc:
             features['Glucose'] = st.number_input('Glucose', min_value=0, step=1, format='%d', value=None, placeholder='')
             features['BMI'] = st.number_input('BMI', min_value=0.0, format='%.2f', value=None, placeholder='')

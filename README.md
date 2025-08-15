@@ -56,3 +56,33 @@ project-folder/
 |-- src/                  # Helper scripts (data processing & modeling)
 |-- README.md             # Project doc
 ```
+
+## 🎥 Demo
+
+### **1. Home page**
+![Home page screenshot](images/home_page.png)
+*Overview of the app with navigation menu for Dataset Exploration and Modeling.*  
+
+---
+
+### **2. Dataset Overview**  
+![Dataset overview screenshot](images/dataset_overview.png)  
+*Displays summary statistics for quick understanding of the data.*  
+
+---
+
+### **3. Charts**  
+![Pairwise scatter plot](images/data_exploration_chart.png)  
+*Pairwise scatter plot for showing correlations between health metrics.*  
+
+---
+
+### **4. Modeling Tab - Predictions**  
+![Using model to get predictions](images/prediction.mp4)  
+*Input patient details and get a prediction on the likelihood of diabetes.*  
+
+---
+
+### **5. Model training process**  
+![Data preprocessing](images/modeling_preprocessing.png)  
+*Data preprocessing step before training the models*  

@@ -29,13 +29,16 @@ cd https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset
 ```
 2. Create and activate a virtual environment  
 ```python -m venv venv```  
-Windows:  
-```env\Scripts\activate```  
-macOS/Linux:  
-```source env/bin/activate```  
-4. Install dependencies  
+Windows:
+  - ```.venv\Scripts\Activate.ps1``` (powershell)
+  - ```.venv\Scripts\activate``` (command prompt)  
+macOS/Linux:  ```source .venv/bin/activate```  
+4. Install dependencies
+
 ```pip install -r requirements.txt```  
-5. Run the Streamlit app  
+
+5. Run the Streamlit app
+6. 
 ```streamlit run main.py```
 
 # Project Structure
@@ -44,7 +47,8 @@ project-folder/
 |-- main.py               # Main Streamlit app file
 |-- requirements.txt      # Dependencies
 |-- models/               # Trained models & related data
-|-- data/                 # Dataset 
+|-- data/                 # Dataset
+|-- scripts/              # Standalone scripts to train the models
 |-- src/                  # Helper scripts (data processing & modeling)
 |-- README.md             # Project doc
 ```

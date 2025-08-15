@@ -1,12 +1,12 @@
 # AI01 Capstone Project: Diabetes Prediction Web App
 
 
-## Overview
+## 🫧 Overview
 This project is a Streamlit-based web application for interacting with the Pima Indians Diabetes Dataset. The app allows users to explore the dataset, understand relationships between features, and test predictions using different models.  
 
 Deployed App: [Click here to try it out](https://ai01-capstone-quang-bk85f8nm8fonqyquqnenh4.streamlit.app/)
 
-## Features in each page
+## ⭐ Features in each page
 - Dataset Exploration
   - View dataset overview, summary statistics, and single-feature visualizations.
   - Check correlations and scatter plots between features.
@@ -16,12 +16,12 @@ Deployed App: [Click here to try it out](https://ai01-capstone-quang-bk85f8nm8fo
   - View model configurations and performance metrics.
   - Predict diabetes likelihood by entering patient data.
 
-## Dataset
+## 📦 Dataset
 Source: Pima Indians Diabetes Database, available on [kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)  
 Attributes: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age  
 Target: Outcome - diabetes (1), non-diabetes (0).
 
-## Installation
+## 🛠️ Installation
 1. Clone the repository
 ```
 git clone https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset.git
@@ -45,7 +45,7 @@ cd https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset
  
 &emsp;&emsp; ```streamlit run main.py```
 
-## Project Structure
+## 📂 Project Structure
 ```
 project-folder/
 |-- main.py               # Main Streamlit app file

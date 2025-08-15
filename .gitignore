@@ -9,3 +9,6 @@ __pycache__/
 
 # Downloaded zip file
 data/diabetes_orig.zip
+
+# Personal stuff
+learning/

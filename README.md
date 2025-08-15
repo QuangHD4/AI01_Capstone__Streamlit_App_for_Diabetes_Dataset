@@ -28,14 +28,14 @@ git clone https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_
 cd https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset.git
 ```
 2. Create and activate a virtual environment  
-```python -m venv venv```
-Windows:
-```env\Scripts\activate```
-macOS/Linux:
-```source env/bin/activate```
-4. Install dependencies
-```pip install -r requirements.txt```
-5. Run the Streamlit app
+```python -m venv venv```  
+Windows:  
+```env\Scripts\activate```  
+macOS/Linux:  
+```source env/bin/activate```  
+4. Install dependencies  
+```pip install -r requirements.txt```  
+5. Run the Streamlit app  
 ```streamlit run main.py```
 
 # Project Structure

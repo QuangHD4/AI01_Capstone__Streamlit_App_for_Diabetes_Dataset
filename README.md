@@ -78,7 +78,7 @@ project-folder/
 ---
 
 ### **4. Modeling Tab - Predictions**  
-![Using model to get predictions](images/prediction.mp4)  
+![Using model to get predictions](images/predictions.png)  
 *Input patient details and get a prediction on the likelihood of diabetes.*  
 
 ---

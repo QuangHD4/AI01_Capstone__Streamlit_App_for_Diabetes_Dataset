@@ -1,11 +1,17 @@
-from .utils import (
-    charts_for_cols, 
-    plot_cv_dist_with_ci, 
+from .elements import (
+    plot_chart,
+    plot_charts, 
+    multicol_hist_with_kde, 
     column_multicheck_dropdown_with_aggregations
+)
+from .errors import (
+    FileMissingColumn
 )
 
 __all__ = [
-    'charts_for_cols',
+    'plot_chart',
+    'plot_charts',
     'column_multicheck_dropdown_with_aggregations',
-    'plot_cv_dist_with_ci'
+    'multicol_hist_with_kde',
+    'FileMissingColumn'
 ]

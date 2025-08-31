@@ -1,5 +1,6 @@
-from src.utils import charts_for_cols, column_multicheck_dropdown_with_aggregations
+from src.elements import plot_charts, column_multicheck_dropdown_with_aggregations
 
+import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -31,7 +32,7 @@ match tab:
     case 'Summary':
         st.write(data_diabetes[selected].describe())
     case 'Detail':
-        charts_for_cols(
+        plot_charts(
             data=data_diabetes,
             cols=selected,
             type=['hist', 'box']
@@ -56,11 +57,11 @@ selected = st.selectbox(
 no_diabetes = data_diabetes[selected].loc[data_diabetes.Outcome == 0]
 yes_diabetes = data_diabetes[selected].loc[data_diabetes.Outcome == 1]
 
-number_of_bins = (data_diabetes[selected].max() if selected == 'Pregnancies' else 25)
+nbins = (data_diabetes[selected].max() if selected == 'Pregnancies' else 25)
 fig = ff.create_distplot(
     [no_diabetes, yes_diabetes], 
     ['Without diabetes', 'With diabetes'], 
-    bin_size = (data_diabetes[selected].max() - data_diabetes[selected].min())/number_of_bins,
+    bin_size = (data_diabetes[selected].max() - data_diabetes[selected].min())/nbins,
     show_rug = False
 )
 st.plotly_chart(fig)
@@ -73,30 +74,23 @@ with right_col:
     feat_y = st.selectbox('Feature 2 (y)', data_diabetes.columns.drop([feat_x, 'Outcome']))
 
 if st.checkbox('Split by outcome'):
-    fig = go.Figure()
-    fig.add_traces([
-        go.Scatter(
-            x=data_diabetes.loc[data_diabetes['Outcome']==1, feat_x], 
-            y=data_diabetes.loc[data_diabetes['Outcome']==1, feat_y],
-            mode='markers', marker={'color': "#D8EAF7", 'size':10}, opacity=0.8,
-            name='With diabetes'
-        ),
-        go.Scatter(
-            x=data_diabetes.loc[data_diabetes['Outcome']==0, feat_x], 
-            y=data_diabetes.loc[data_diabetes['Outcome']==0, feat_y],
-            mode='markers', marker={'color': "#004CA4", 'size':10}, opacity=0.8,
-            name='Without diabetes'
-        )
-    ])
-    fig.update_layout(
-        xaxis_title=feat_x, yaxis_title=feat_y, 
-        title=f'Correlation coefficient: {corr_matrix.loc[feat_x, feat_y]}'
+    scatter_split_data = data_diabetes.copy()
+    label_map = {0:'With diabetes', 1:'No diabetes'}
+    scatter_split_data['Outcome'] = scatter_split_data['Outcome'].map(label_map)
+    scatter_split_outcome_fig = px.scatter(
+        scatter_split_data, x=feat_x,y=feat_y, color='Outcome',
+        color_discrete_map={'With diabetes':'#D8EAF7', 'No diabetes':'#004CA4'},
+        opacity=0.6, 
+        trendline='ols'
     )
-    st.plotly_chart(fig)
+    scatter_split_outcome_fig.update_traces(marker={'size':9})
+    st.plotly_chart(scatter_split_outcome_fig)
 else:
     fig = px.scatter(x=data_diabetes[feat_x], y=data_diabetes[feat_y], trendline='ols')
     fig.update_traces(marker_size=10)
-    fig.update_layout(title=f'Correlation coefficient: {corr_matrix.loc[feat_x, feat_y]}')
+    fig.update_layout(
+        xaxis_title=feat_x, yaxis_title=feat_y, 
+        title=f'Correlation coefficient: {corr_matrix.loc[feat_x, feat_y]}')
     st.plotly_chart(fig)
 
 

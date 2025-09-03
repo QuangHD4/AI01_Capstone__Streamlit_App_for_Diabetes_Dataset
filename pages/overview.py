@@ -1,54 +1,7 @@
-import io, re, copy
-
-import numpy as np
 import pandas as pd
 import streamlit as st
-import plotly.express as px
-import plotly.figure_factory as ff
-import plotly.graph_objects as go
-from scipy.stats import skew, kurtosis
-import scipy.stats as stats
-import matplotlib.pyplot as plt
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import KNNImputer, IterativeImputer
 
-from src.elements import plot_charts, column_multicheck_dropdown_with_aggregations, df_info_table, build_sequence, clear_selections
-
-# # inject custom css 
-# st.markdown('''
-#     <style>
-#     a.custom-link {
-#         color: white;
-#         text-decoration: none;
-#         font-size: 14px;
-#         padding: 4px 8px;
-#         border-radius: 8px;
-#         transition: background-color 0.2s ease;
-#         display: block;
-#         margin-bottom: 4px;
-#     }
-#     a.custom-link:hover {
-#         background-color: rgba(255, 255, 255, 0.2);
-#     }
-#     </style>
-# ''', unsafe_allow_html=True)
-# with st.sidebar:
-#     st.markdown('''
-#         <a class='custom-link' href='#1-dataset-overview'>1. Dataset overview</a>
-#         <a class='custom-link' href='#2-univariate-analysis' >2. Univariate analysis</a>
-#         <a class='custom-link' href='#3-bivariate-analysis'>3. Bivariate analysis</a>
-#         <a class='custom-link' href='#3-1-correlation-matrix'>&emsp; 3.1. Correlation matrix</a>
-#         <a class='custom-link' href='#3-2-feature-distribution-split-by-outcome'>&emsp; 3.2. Feature distribution split by outcome</a>
-#         <a class='custom-link' href='#3-3-pairwise-scatter-plots'>&emsp; 3.3. Pairwise scatter plots</a>
-#         <a class='custom-link' href='#4-playground'>4. Playground</a>
-#         <a class='custom-link' href='#4-1-multivariate-analysis'>&emsp; 4.1. Multivariate analysis</a>
-#         <a class='custom-link' href='#4-2-feature-engineering'>&emsp; 4.2. Feature engineering</a>
-#         <a class='custom-link' href='#4-2-1-feature-preprocessing'>&emsp;&emsp; 4.2.1. Feature preprocessing</a>
-#         <a class='custom-link' href='#4-2-2-feature-generation'>&emsp;&emsp; 4.2.2. Feature generation</a>
-#         <a class='custom-link' href='#5-recap'>5. Recap</a>
-#         <a class='custom-link' href='#6-references'>6. References</a>
-#     ''', unsafe_allow_html=True)
-
+from src.elements import df_info_table
 
 data_diabetes = pd.read_csv('data/diabetes.csv')
 n_duplicates = data_diabetes.duplicated().sum()

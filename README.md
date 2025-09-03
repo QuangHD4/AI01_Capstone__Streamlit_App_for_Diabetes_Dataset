@@ -7,14 +7,20 @@ This project is a Streamlit-based web application for interacting with the Pima 
 Deployed App: [Click here to try it out](https://ai01-capstone-quang-bk85f8nm8fonqyquqnenh4.streamlit.app/)
 
 ## ⭐ Features in each page
-- Dataset Exploration
-  - View dataset overview, summary statistics, and single-feature visualizations.
-  - Check correlations and scatter plots between features.
-  - Read initial observations from the dataset.
-- Modeling
-  - Compare models (Logistic Regression, KNN) using cross-validation.
-  - View model configurations and performance metrics.
-  - Predict diabetes likelihood by entering patient data.
+- Dataset Overview
+  - Basic info of the dataset
+  - Initial data quality observations
+- Univariate Analysis
+  - Single-column charts
+  - Observations on suspicious values and feature distribution
+- Bivariate Analysis
+  - More charts
+  - More observations (feature interactions) 
+- Playground
+  - Various imputers for missing values
+  - Distribution transformers
+  - Feature creator
+  - A few more interactive charts
 
 ## 📦 Dataset
 Source: Pima Indians Diabetes Database, available on [kaggle](https://www.kaggle.com/datasets/mathchi/diabetes-data-set)  
@@ -50,39 +56,35 @@ cd https://github.com/QuangHD4/AI01_Capstone__Streamlit_App_for_Diabetes_Dataset
 project-folder/
 |-- main.py               # Main Streamlit app file
 |-- requirements.txt      # Dependencies
-|-- models/               # Trained models & related data
-|-- data/                 # Dataset
-|-- scripts/              # Standalone scripts to train the models
+|-- pages/
+|---|-- overview.py
+|---|-- univariate.py
+|---|-- bivariate.py
+|---|-- playground.py
 |-- src/                  # Helper scripts (data processing & modeling)
 |-- README.md             # Project doc
 ```
 
 ## 🎥 Demo
 
-### **1. Home page**
-![Home page screenshot](images/home_page.png)
-*Overview of the app with navigation menu for Dataset Exploration and Modeling.*  
+### **1. Dataset Overview**
+![Dataset overview page screenshot](images/overview.png)
+*Overview of the dataset*  
 
 ---
 
-### **2. Dataset Overview**  
-![Dataset overview screenshot](images/dataset_overview.png)  
-*Displays summary statistics for quick understanding of the data.*  
+### **2. Univariate Analysis**  
+![Histograms](images/univar.png)  
+*Displays histograms for quick understanding of the feature's distribution.*  
 
 ---
 
-### **3. Charts**  
+### **3. Bivariate Analysis**  
 ![Pairwise scatter plot](images/data_exploration_chart.png)  
 *Pairwise scatter plot for showing correlations between health metrics.*  
 
 ---
 
-### **4. Modeling Tab - Predictions**  
-![Using model to get predictions](images/predictions.png)  
-*Input patient details and get a prediction on the likelihood of diabetes.*  
-
----
-
-### **5. Model training process**  
-![Data preprocessing](images/modeling_preprocessing.png)  
-*Data preprocessing step before training the models*  
+### **4. Playground**  
+![Transform feature distribution](images/play.png)  
+*Make a feature normal using transformations*  

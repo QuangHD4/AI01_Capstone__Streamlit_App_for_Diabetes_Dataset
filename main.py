@@ -1,7 +1,8 @@
 import streamlit as st
 
-intro_page = st.Page('pages/hello.py', title='Intro', icon=':material/rocket_launch:')
-data_expl_page = st.Page('pages/dataset_exploration.py', title= 'Dataset Exploration', icon=':material/data_exploration:')
-ml_page = st.Page('pages/simple_ml.py', title='Modeling', icon=':material/grain:')
+overview = st.Page('pages/overview.py', title= 'Dataset Overview', icon=':material/data_exploration:')
+univariate = st.Page('pages/univariate.py', title= 'Univariate Analysis', icon=':material/vital_signs:')
+bivariate = st.Page('pages/bivariate.py', title= 'Bivariate Analysis', icon=':material/hive:')
+playground = st.Page('pages/playground.py', title= 'Playground', icon=':material/view_in_ar:')
 
-st.navigation(pages={'':[intro_page], 'Main stuff':[data_expl_page, ml_page]}).run()
+st.navigation(pages=[overview, univariate, bivariate, playground]).run()

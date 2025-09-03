@@ -1,4 +1,5 @@
-from typing import Sequence, Literal
+import re, io
+from typing import Sequence, Literal, List, Dict, Any, Tuple
 from colorsys import hsv_to_rgb
 
 import numpy as np
@@ -90,38 +91,89 @@ def multicol_hist_with_kde(data:pd.DataFrame|pd.Series, nbins=20, xaxis_title:st
     st.plotly_chart(fig)
     return fig
 
-def pairwise_scatter_plots_varying_radius(data:pd.DataFrame, ):
-    '''
-    For simple pairwise scatter plot, use px.scatter instead
-    '''
-    for row_no, y_model in enumerate(selected_models):
-        for col_no, x_model in enumerate(selected_models):
-            if row_no == col_no:
-                continue
-            counts = kfoldcv_scores.groupby([x_model, y_model]).size().reset_index(name='size')
-            pair_kfoldcv_score_fig.add_trace(
-                go.Scatter(
-                    x=counts[x_model], y=counts[y_model],
-                    mode='markers', 
-                    marker=dict(
-                        size=counts['size']*6/len(selected_models),
-                        sizemode='area',
-                    ),
-                ),
-                row=row_no+1, col=col_no+1,
-            )
-            pair_kfoldcv_score_fig.add_shape(
-                type="line",
-                x0=min(kfoldcv_scores[y_model].min(), kfoldcv_scores[x_model].min()),
-                y0=min(kfoldcv_scores[y_model].min(), kfoldcv_scores[x_model].min()),
-                x1=max(kfoldcv_scores[y_model].max(), kfoldcv_scores[x_model].max()),
-                y1=max(kfoldcv_scores[y_model].max(), kfoldcv_scores[x_model].max()),
-                line=dict(
-                    color="yellow",
-                    width=1.5,
-                    # dash="dash"
-                ),
-                row=row_no+1, col=col_no+1,
-            )
-    pair_kfoldcv_score_fig.update_layout(height=800, showlegend=False)
-    st.plotly_chart(pair_kfoldcv_score_fig)
+def df_info_table(data:pd.DataFrame):
+    # Capture df.info() output
+    buffer = io.StringIO()
+    data.info(buf=buffer)
+    info_str = buffer.getvalue()
+
+    # Parse the info_str into a structured DataFrame
+    lines = info_str.splitlines()
+
+    # Find the lines that contain column info
+    col_lines = []
+    for line in lines:
+        # Matches lines like: ' 0   foo   object  ...'
+        if re.match(r'\s*\d+\s+', line):
+            col_lines.append(line.strip())
+
+    # Split each line into parts
+    parsed = []
+    for line in col_lines:
+        parts = re.split(r'\s{2,}', line)  # split on 2+ spaces
+        parsed.append(parts)
+
+    # Create DataFrame from parsed info
+    info_df = pd.DataFrame(parsed, columns=['Index', 'Column', 'Non-Null Count', 'Dtype']).set_index('Index')
+
+    # Display in Streamlit
+    st.dataframe(info_df)
+
+def build_sequence(options:List[str], follow_up_config: Dict[str,Dict[str,Any]], item_caption:str='') -> Tuple[List[str], Dict[int, str]]:
+    if "transforms" not in st.session_state:
+        st.session_state.transforms = []
+    if "follow_ups" not in st.session_state:
+        st.session_state.follow_ups = {}
+
+    total_boxes = len(st.session_state.transforms) + 1
+
+    for box_index in range(total_boxes):
+        key = f"select_{box_index}"
+        default_index = None
+        if box_index < len(st.session_state.transforms):
+            default_index = options.index(st.session_state.transforms[box_index])
+        selected = st.selectbox(
+            f"{item_caption} #{box_index + 1}",
+            options,
+            index=default_index,
+            key=key,
+            label_visibility='collapsed'
+        )
+
+        # new selection
+        if box_index == len(st.session_state.transforms):
+            if selected:
+                st.session_state.transforms.append(selected)
+                st.rerun()
+        else:
+            st.session_state.transforms[box_index] = selected
+
+        # Render follow-up widget if applicable
+        if selected in follow_up_config:
+            config = follow_up_config[selected]
+            follow_key = f"follow_{box_index}"
+            if config["type"] == "slider":
+                value = st.slider(
+                    config["label"],
+                    min_value=config["min"],
+                    max_value=config["max"],
+                    step=config["step"],
+                    key=follow_key,
+                    value=config.get('default'),
+                    label_visibility=config.get('label_visibility', 'visible')
+                )
+            elif config["type"] == "number_input":
+                value = st.number_input(config["label"], key=follow_key)
+            else:
+                value = None
+
+            st.session_state.follow_ups[box_index] = value
+        else:
+            st.session_state.follow_ups[box_index] = None
+
+    return st.session_state.transforms, st.session_state.follow_ups
+
+def clear_selections():
+    st.session_state.transforms = []
+    st.session_state.follow_ups = {}
+    st.rerun()
